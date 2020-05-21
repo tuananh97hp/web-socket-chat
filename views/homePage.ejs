@@ -1,26 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style/style.css">
 </head>
+
 <body>
-    <h1>dinh tuan anh: home pagesssss</h1>
+    <div class="container">
+        <div class="modal_sigup">
+            <div class="modal fade show" style="display: block;" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert_messenge text-danger">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Nhập Tên để chat :</label>
+                                <input type="text" name="username" class="form-control" id="recipient-name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="create_chat">chat</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content_mes">
+            <div class="container-fluid h-60">
+                <div class="row justify-content-center h-100">
+                    <div class="col-md-4 col-xl-3 chat">
+                        <div class="card mb-sm-3 mb-md-0 contacts_card">
+                            <div class="card-header">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Search..." name="" class="form-control search">
+                                </div>
+                            </div>
+                            <div class="card-body contacts_body">
+                                <ui class="contacts">
+
+                                </ui>
+                            </div>
+                            <div class="card-footer"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xl-6 chat">
+                        <div class="card">
+                            <div class="card-header msg_head">
+
+                            </div>
+                            <div class="card-body msg_card_body">
+
+                            </div>
+                            <div class="card-footer">
+                                <div class="input-group">
+                                    <input type="text" name="input_messenge" class="form-control type_msg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content_chat_all h-40">
+                <div class="show_mes_all card overflow-auto col-md-11 col-xl-9 m-auto h-75">
+                    <div class="content">
+
+                    </div>
+                </div>
+                <div class="chat col-md-11 col-xl-9 m-auto">
+                    <div class="card-footer">
+                        <div class="input-group">
+                            <input type="text" name="input_messenge_all" placeholder="chat all ......" class="form-control type_msg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<li class="d-none contact_item contact_item_defaul">
+    <div class="d-flex bd-highlight">
+        <div class="user_info">
+            <span class="username"></span>
+        </div>
+    </div>
+</li>
+
+<div class="d-none justify-content-end mb-4">
+    <div class="msg_cotainer_send">
+
+    </div>
+</div>
+
+<div class="d-none justify-content-start mb-4">
+    <div class="msg_cotainer">
+
+    </div>
+</div>
+
+<div class="modal-backdrop fade show"></div>
+<script src="/script/script.js"></script>
+
 </html>
-<script src="">
-    console.log('aaaaaaaaa');
-    const mysql = require('mysql');
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'phpmyadmin',
-  password: 'tanh1997',
-  database: 'laravel'
-});
-connection.connect((err) => {
-  if (err) throw err;
-  console.log('Connected!');
-});
-</script>
