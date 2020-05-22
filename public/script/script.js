@@ -1,5 +1,8 @@
 var socket = io();
 var users = [];
+var listUserMessenger = [];
+var userReceive = {};
+
 $(document).ready(() => {
     createUser();
     messengeGroup();
@@ -36,8 +39,10 @@ function createUser() {
         this.users = data;
         data.forEach((user) => {
             let element = $(".contact_item_defaul").clone();
+            element.attr("data-username", user.username);
+            element.attr("data-key", user.key);
             element.removeClass("d-none").removeClass("contact_item_defaul").addClass("d-block");
-            element.find(".username").text(user);
+            element.find(".username").text(user.username);
             $(".contacts").append(element);
         });
     });
@@ -56,11 +61,63 @@ function messengeGroup() {
     })
 
     socket.on("receive_messenge_all", (data) => {
-        console.log(data);
         appendMesAllReceive(data);
     })
 }
 
+function directMessenge() {
+
+    $(document).on("click", ".contact_item", (event) => {
+        $(".contact_item.active").removeClass("active");
+        $(event.currentTarget).addClass("active");
+        this.userReceive.username = $(event.currentTarget).data("username");
+        this.userReceive.key = $(event.currentTarget).data("key");
+
+        $(".msg_card_body").find(".content").children().remove();
+
+        let messenges = this.listUserMessenger.filter((content) => {
+            return (content.usernameReceive == this.userReceive.username || content.usernameSend == this.userReceive.username);
+        })
+        messenges.forEach((mes) => {
+            let m = mes.messenge;
+            let ur = mes.usernameReceive;
+            let us = mes.usernameSend;
+            if (ur !== undefined) {
+                appendMesSend(m);
+
+            } else {
+                appendMesReceive(m);
+            }
+        })
+    });
+
+    $('input[name="input_messenge"]').keyup((event) => {
+        if (event.keyCode === 13 && $(event.target).val().trim() != "" && this.userReceive.key != undefined) {
+            let mes = $(event.target).val();
+            let dataSend = { messenge: mes, usernameReceive: this.userReceive.username, keyReceive: this.userReceive.key };
+            this.listUserMessenger.push(dataSend);
+            socket.emit("send_messenge", dataSend);
+            $(event.target).val("")
+            appendMesSend(mes)
+        }
+    });
+
+    socket.on("receive_messenge", (data) => {
+        this.listUserMessenger.push(data);
+        if (this.userReceive.username === data.usernameSend) {
+            appendMesReceive(data.messenge);
+        } else {
+            let element = $('.toast');
+            element.find(".toast-header").text(data.usernameSend);
+            element.find(".toast-body").text(data.messenge);
+            element.toast('show');
+        }
+    });
+}
+
+
+
+//append mess all
 function appendMesAllSend(mes) {
     let element = $(".justify-content-end.d-none").clone();
     element.removeClass("d-none").addClass("d-flex");
@@ -80,13 +137,23 @@ function appendMesAllReceive(data) {
     $(".show_mes_all").scrollTop($(".show_mes_all").find(".content").height());
 }
 
-function directMessenge() {
-    $('input[name="input_messenge"]').keyup((event) => {
-        if (event.keyCode === 13 && $(event.target).val().trim() != "") {
-            let mes = $(event.target).val();
-            socket.emit("send_messenge", mes);
-        }
-    });
 
+//append mess
+function appendMesSend(mes) {
+    let element = $(".justify-content-end.d-none").clone();
+    element.removeClass("d-none").addClass("d-flex");
 
+    element.find(".msg_cotainer_send").text(mes);
+    $(".msg_card_body").find(".content").append(element);
+    $(".msg_card_body").scrollTop($(".msg_card_body").find(".content").height());
+}
+
+function appendMesReceive(mes) {
+    console.log(mes)
+    let element = $(".justify-content-start.d-none").clone();
+    element.removeClass("d-none").addClass("d-flex");
+
+    element.find(".msg_cotainer").text(mes);
+    $(".msg_card_body").find(".content").append(element);
+    $(".msg_card_body").scrollTop($(".msg_card_body").find(".content").height());
 }

@@ -111,7 +111,14 @@ html {
     font-size: 10px;
 }
 
-.show_mes_all {}
+.show_mes_all::-webkit-scrollbar {
+    width: 5px;
+}
+
+.show_mes_all::-webkit-scrollbar-thumb {
+    background: #7F80D6;
+    border-radius: 10px;
+}
 
 .h-60 {
     height: 60% !important;
@@ -119,4 +126,12 @@ html {
 
 .h-40 {
     height: 40% !important;
+}
+
+.msg_cotainer_send {
+    word-break: break-word;
+}
+
+.msg_cotainer {
+    word-break: break-word;
 }

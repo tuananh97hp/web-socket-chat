@@ -5,15 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="/image/favicon.jpg" type="image/x-icon">
     <title>Document</title>
     <script src="socket.io/socket.io.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/style/style.css">
 </head>
 
 <body>
-    <div class="container">
+    <div class="container position-relative">
+        <div class="toast position-absolute" style="right: -100px;">
+            <div class="toast-header">
+                Toast Header
+            </div>
+            <div class="toast-body">
+                Some text inside the toast body
+            </div>
+        </div>
         <div class="modal_sigup">
             <div class="modal fade show" style="display: block;" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -62,7 +73,9 @@
 
                             </div>
                             <div class="card-body msg_card_body">
+                                <div class="content">
 
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <div class="input-group">
@@ -89,6 +102,7 @@
             </div>
         </div>
     </div>
+
 </body>
 <li class="d-none contact_item contact_item_defaul">
     <div class="d-flex bd-highlight">
